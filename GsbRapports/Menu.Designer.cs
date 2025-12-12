@@ -45,7 +45,7 @@
             this.visualisationToolStripMenuItem});
             this.menuStripRapports.Location = new System.Drawing.Point(0, 0);
             this.menuStripRapports.Name = "menuStripRapports";
-            this.menuStripRapports.Size = new System.Drawing.Size(872, 36);
+            this.menuStripRapports.Size = new System.Drawing.Size(872, 33);
             this.menuStripRapports.TabIndex = 0;
             this.menuStripRapports.Text = "menuStrip1";
             // 
@@ -78,7 +78,7 @@
             this.MainMenuStrip = this.menuStripRapports;
             this.Name = "Menu";
             this.Text = "Gestion des Rapports";
-            
+            this.Load += new System.EventHandler(this.Menu_Load);
             this.menuStripRapports.ResumeLayout(false);
             this.menuStripRapports.PerformLayout();
             this.ResumeLayout(false);

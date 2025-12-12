@@ -50,31 +50,33 @@
             this.lstMedicament = new System.Windows.Forms.ListBox();
             this.lblMedicament = new System.Windows.Forms.Label();
             this.lblQuantite = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbNomMedicament = new System.Windows.Forms.ComboBox();
             this.QuantiteMedicament = new System.Windows.Forms.NumericUpDown();
             this.btnAjouter = new System.Windows.Forms.Button();
             this.btnValider = new System.Windows.Forms.Button();
             this.grpDetailVisite = new System.Windows.Forms.GroupBox();
             this.lblMedicamentsOffert = new System.Windows.Forms.Label();
-            this.bdgSourceVisiteur = new System.Windows.Forms.BindingSource(this.components);
-            this.bdgSourceMedecin = new System.Windows.Forms.BindingSource(this.components);
             this.bdgSourceMedicament = new System.Windows.Forms.BindingSource(this.components);
+            this.bdgSourceMedecin = new System.Windows.Forms.BindingSource(this.components);
+            this.bdgSourceVisiteur = new System.Windows.Forms.BindingSource(this.components);
             this.grpVisiteur.SuspendLayout();
             this.grpMedecin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.QuantiteMedicament)).BeginInit();
             this.grpDetailVisite.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceVisiteur)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceMedecin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdgSourceMedicament)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceMedecin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceVisiteur)).BeginInit();
             this.SuspendLayout();
             // 
             // cmbNomVisiteur
             // 
+            this.cmbNomVisiteur.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdgSourceVisiteur, "nom", true));
             this.cmbNomVisiteur.FormattingEnabled = true;
             this.cmbNomVisiteur.Location = new System.Drawing.Point(159, 49);
             this.cmbNomVisiteur.Name = "cmbNomVisiteur";
             this.cmbNomVisiteur.Size = new System.Drawing.Size(129, 28);
             this.cmbNomVisiteur.TabIndex = 2;
+            this.cmbNomVisiteur.SelectedIndexChanged += new System.EventHandler(this.cmbNomVisiteur_SelectedIndexChanged);
             // 
             // lblMotif
             // 
@@ -105,6 +107,7 @@
             // 
             // cmbPrenomVisiteur
             // 
+            this.cmbPrenomVisiteur.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdgSourceVisiteur, "prenom", true));
             this.cmbPrenomVisiteur.FormattingEnabled = true;
             this.cmbPrenomVisiteur.Location = new System.Drawing.Point(522, 49);
             this.cmbPrenomVisiteur.Name = "cmbPrenomVisiteur";
@@ -186,6 +189,7 @@
             // 
             // cmbAdresseMedecin
             // 
+            this.cmbAdresseMedecin.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdgSourceMedecin, "adresse", true));
             this.cmbAdresseMedecin.FormattingEnabled = true;
             this.cmbAdresseMedecin.Location = new System.Drawing.Point(549, 48);
             this.cmbAdresseMedecin.Name = "cmbAdresseMedecin";
@@ -194,19 +198,23 @@
             // 
             // cmbPrenomMedecin
             // 
+            this.cmbPrenomMedecin.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdgSourceMedecin, "prenom", true));
             this.cmbPrenomMedecin.FormattingEnabled = true;
             this.cmbPrenomMedecin.Location = new System.Drawing.Point(321, 48);
             this.cmbPrenomMedecin.Name = "cmbPrenomMedecin";
             this.cmbPrenomMedecin.Size = new System.Drawing.Size(121, 28);
             this.cmbPrenomMedecin.TabIndex = 1;
+            this.cmbPrenomMedecin.SelectedIndexChanged += new System.EventHandler(this.cmbPrenomMedecin_SelectedIndexChanged);
             // 
             // cmbNomMedecin
             // 
+            this.cmbNomMedecin.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdgSourceMedecin, "nom", true));
             this.cmbNomMedecin.FormattingEnabled = true;
             this.cmbNomMedecin.Location = new System.Drawing.Point(84, 48);
             this.cmbNomMedecin.Name = "cmbNomMedecin";
             this.cmbNomMedecin.Size = new System.Drawing.Size(121, 28);
             this.cmbNomMedecin.TabIndex = 0;
+            this.cmbNomMedecin.SelectedIndexChanged += new System.EventHandler(this.cmbNomMedecin_SelectedIndexChanged);
             // 
             // txtMotif
             // 
@@ -256,13 +264,14 @@
             this.lblQuantite.TabIndex = 15;
             this.lblQuantite.Text = "Quantite : ";
             // 
-            // comboBox1
+            // cmbNomMedicament
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(184, 44);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 28);
-            this.comboBox1.TabIndex = 16;
+            this.cmbNomMedicament.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdgSourceMedicament, "nomCommercial", true));
+            this.cmbNomMedicament.FormattingEnabled = true;
+            this.cmbNomMedicament.Location = new System.Drawing.Point(184, 44);
+            this.cmbNomMedicament.Name = "cmbNomMedicament";
+            this.cmbNomMedicament.Size = new System.Drawing.Size(121, 28);
+            this.cmbNomMedicament.TabIndex = 16;
             // 
             // QuantiteMedicament
             // 
@@ -294,7 +303,7 @@
             // 
             this.grpDetailVisite.Controls.Add(this.btnAjouter);
             this.grpDetailVisite.Controls.Add(this.QuantiteMedicament);
-            this.grpDetailVisite.Controls.Add(this.comboBox1);
+            this.grpDetailVisite.Controls.Add(this.cmbNomMedicament);
             this.grpDetailVisite.Controls.Add(this.lblQuantite);
             this.grpDetailVisite.Controls.Add(this.lblMedicament);
             this.grpDetailVisite.Location = new System.Drawing.Point(58, 508);
@@ -313,17 +322,17 @@
             this.lblMedicamentsOffert.TabIndex = 21;
             this.lblMedicamentsOffert.Text = "Medicaments offerts :";
             // 
-            // bdgSourceVisiteur
+            // bdgSourceMedicament
             // 
-            this.bdgSourceVisiteur.DataSource = typeof(GsbRapports.visiteur);
+            this.bdgSourceMedicament.DataSource = typeof(GsbRapports.medicament);
             // 
             // bdgSourceMedecin
             // 
             this.bdgSourceMedecin.DataSource = typeof(GsbRapports.medecin);
             // 
-            // bdgSourceMedicament
+            // bdgSourceVisiteur
             // 
-            this.bdgSourceMedicament.DataSource = typeof(GsbRapports.medicament);
+            this.bdgSourceVisiteur.DataSource = typeof(GsbRapports.visiteur);
             // 
             // frmAjoutRapports
             // 
@@ -344,6 +353,7 @@
             this.Controls.Add(this.lblMotif);
             this.Name = "frmAjoutRapports";
             this.Text = "Ajouter Rapport";
+            this.Load += new System.EventHandler(this.frmAjoutRapports_Load);
             this.grpVisiteur.ResumeLayout(false);
             this.grpVisiteur.PerformLayout();
             this.grpMedecin.ResumeLayout(false);
@@ -351,9 +361,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.QuantiteMedicament)).EndInit();
             this.grpDetailVisite.ResumeLayout(false);
             this.grpDetailVisite.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceVisiteur)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceMedecin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdgSourceMedicament)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceMedecin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceVisiteur)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -381,7 +391,7 @@
         private System.Windows.Forms.ListBox lstMedicament;
         private System.Windows.Forms.Label lblMedicament;
         private System.Windows.Forms.Label lblQuantite;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbNomMedicament;
         private System.Windows.Forms.NumericUpDown QuantiteMedicament;
         private System.Windows.Forms.Button btnAjouter;
         private System.Windows.Forms.Button btnValider;

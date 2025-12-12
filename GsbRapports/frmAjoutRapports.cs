@@ -12,18 +12,110 @@ namespace GsbRapports
 {
     public partial class frmAjoutRapports : Form
     {
-        private gsbrapports2026Entities mesDonneesEF { get; set; }
-        public frmAjoutRapports(gsbrapports2026Entities mesDonnesEFF)
+        private gsbrapports2026Entities mesDonneesEF;
+        public frmAjoutRapports(gsbrapports2026Entities mesDonneeEFF)
         {
             InitializeComponent();
-            this.mesDonneesEF = mesDonnesEFF;
-            this.bdgSourceVisiteur.DataSource = mesDonneesEF.visiteurs.ToList();
-            this.bdgSourceMedecin.DataSource = mesDonneesEF.medecins.ToList();
-            this.bdgSourceMedicament.DataSource = mesDonneesEF.medicaments.ToList();
+            this.mesDonneesEF = mesDonneeEFF;
+            bdgSourceVisiteur = new BindingSource();
+            bdgSourceMedecin = new BindingSource();
+            bdgSourceMedicament = new BindingSource();
+
+            var listeVisiteurs = (from v in mesDonneesEF.visiteurs
+                                  orderby v.nom
+                                  select v.nom)
+                      .Distinct()
+                      .Select(n => new
+                      {
+                          NomComplet = n
+                      })
+                      .ToList();
+
+            this.bdgSourceVisiteur.DataSource = listeVisiteurs;
+            cmbNomVisiteur.DisplayMember = "NomComplet";
+            cmbNomVisiteur.ValueMember = "Id";
+            cmbNomVisiteur.DataSource = bdgSourceVisiteur;
+
+
+
+
+            var listeMedecins = (from m in mesDonneesEF.medecins
+                                 orderby m.nom
+                                 select m.nom)          
+                     .Distinct()            
+                     .Select(n => new       
+                     {
+                         NomComplet = n
+                     })
+                     .ToList();
+
+
+            this.bdgSourceMedecin.DataSource = listeMedecins;
+            cmbNomMedecin.DisplayMember = "NomComplet";
+            cmbNomMedecin.ValueMember = "Id";
+            cmbNomMedecin.DataSource = bdgSourceMedecin;
+
+            var listeMedicaments = (from med in mesDonneesEF.medicaments
+                                    orderby med.nomCommercial
+                                    select new
+                                    {
+                                        Id = med.id,
+                                        Nom = med.nomCommercial
+                                    }).ToList();
+
+            this.bdgSourceMedicament.DataSource = listeMedicaments;
+            cmbNomMedicament.DisplayMember = "Nom";
+            cmbNomMedicament.ValueMember = "Id";
+            cmbNomMedicament.DataSource = bdgSourceMedicament;
+        }
+        private void frmAjoutRapports_Load(object sender, EventArgs e)
+        {
+
         }
 
-        
+        private void cmbNomVisiteur_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string nomSelectionne = cmbNomVisiteur.Text;
+            var listePrenoms = (from v in mesDonneesEF.visiteurs
+                                where v.nom == nomSelectionne
+                                select new
+                                {
+                                    Prenom = v.prenom
+                                }).ToList();
+            cmbPrenomVisiteur.DisplayMember = "Prenom";
+            cmbPrenomVisiteur.ValueMember = "Prenom";
+            cmbPrenomVisiteur.DataSource = listePrenoms;
+        }
 
-       
+        private void cmbNomMedecin_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string nomSelectionne = cmbNomMedecin.Text;
+
+            var listePrenomsMedecins = (from m in mesDonneesEF.medecins
+                                        where m.nom == nomSelectionne
+                                        select new
+                                        {
+                                            Prenom = m.prenom
+                                        }).ToList();
+            cmbPrenomMedecin.DisplayMember = "Prenom";
+            cmbPrenomMedecin.ValueMember = "Prenom";
+            cmbPrenomMedecin.DataSource = listePrenomsMedecins;
+
+        }
+
+        private void cmbPrenomMedecin_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string nomSelectionne = cmbNomMedecin.Text;
+            string prenomSelectionne = cmbPrenomMedecin.Text;
+
+            var adresseMedecin = (from m in mesDonneesEF.medecins
+                                  where m.nom == nomSelectionne
+                                     && m.prenom == prenomSelectionne
+                                  select m.adresse)
+                                  .FirstOrDefault();
+
+            cmbAdresseMedecin.Text = adresseMedecin;
+        }
+    
     }
 }
