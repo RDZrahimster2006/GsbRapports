@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.cmbNomVisiteur = new System.Windows.Forms.ComboBox();
+            this.bdgSourceVisiteur = new System.Windows.Forms.BindingSource(this.components);
             this.lblMotif = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
             this.lblBilan = new System.Windows.Forms.Label();
@@ -42,6 +43,7 @@
             this.lblPrenomMedecin = new System.Windows.Forms.Label();
             this.lblNomMedecin = new System.Windows.Forms.Label();
             this.cmbAdresseMedecin = new System.Windows.Forms.ComboBox();
+            this.bdgSourceMedecin = new System.Windows.Forms.BindingSource(this.components);
             this.cmbPrenomMedecin = new System.Windows.Forms.ComboBox();
             this.cmbNomMedecin = new System.Windows.Forms.ComboBox();
             this.txtMotif = new System.Windows.Forms.TextBox();
@@ -51,21 +53,19 @@
             this.lblMedicament = new System.Windows.Forms.Label();
             this.lblQuantite = new System.Windows.Forms.Label();
             this.cmbNomMedicament = new System.Windows.Forms.ComboBox();
+            this.bdgSourceMedicament = new System.Windows.Forms.BindingSource(this.components);
             this.QuantiteMedicament = new System.Windows.Forms.NumericUpDown();
             this.btnAjouter = new System.Windows.Forms.Button();
             this.btnValider = new System.Windows.Forms.Button();
             this.grpDetailVisite = new System.Windows.Forms.GroupBox();
             this.lblMedicamentsOffert = new System.Windows.Forms.Label();
-            this.bdgSourceMedicament = new System.Windows.Forms.BindingSource(this.components);
-            this.bdgSourceMedecin = new System.Windows.Forms.BindingSource(this.components);
-            this.bdgSourceVisiteur = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceVisiteur)).BeginInit();
             this.grpVisiteur.SuspendLayout();
             this.grpMedecin.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceMedecin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceMedicament)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.QuantiteMedicament)).BeginInit();
             this.grpDetailVisite.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceMedicament)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceMedecin)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceVisiteur)).BeginInit();
             this.SuspendLayout();
             // 
             // cmbNomVisiteur
@@ -77,6 +77,10 @@
             this.cmbNomVisiteur.Size = new System.Drawing.Size(129, 28);
             this.cmbNomVisiteur.TabIndex = 2;
             this.cmbNomVisiteur.SelectedIndexChanged += new System.EventHandler(this.cmbNomVisiteur_SelectedIndexChanged);
+            // 
+            // bdgSourceVisiteur
+            // 
+            this.bdgSourceVisiteur.DataSource = typeof(GsbRapports.visiteur);
             // 
             // lblMotif
             // 
@@ -196,6 +200,10 @@
             this.cmbAdresseMedecin.Size = new System.Drawing.Size(305, 28);
             this.cmbAdresseMedecin.TabIndex = 2;
             // 
+            // bdgSourceMedecin
+            // 
+            this.bdgSourceMedecin.DataSource = typeof(GsbRapports.medecin);
+            // 
             // cmbPrenomMedecin
             // 
             this.cmbPrenomMedecin.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bdgSourceMedecin, "prenom", true));
@@ -232,7 +240,7 @@
             // 
             // dateVisite
             // 
-            this.dateVisite.Location = new System.Drawing.Point(217, 367);
+            this.dateVisite.Location = new System.Drawing.Point(217, 353);
             this.dateVisite.Name = "dateVisite";
             this.dateVisite.Size = new System.Drawing.Size(249, 26);
             this.dateVisite.TabIndex = 12;
@@ -273,6 +281,10 @@
             this.cmbNomMedicament.Size = new System.Drawing.Size(121, 28);
             this.cmbNomMedicament.TabIndex = 16;
             // 
+            // bdgSourceMedicament
+            // 
+            this.bdgSourceMedicament.DataSource = typeof(GsbRapports.medicament);
+            // 
             // QuantiteMedicament
             // 
             this.QuantiteMedicament.Location = new System.Drawing.Point(184, 139);
@@ -288,6 +300,7 @@
             this.btnAjouter.TabIndex = 18;
             this.btnAjouter.Text = "Ajouter";
             this.btnAjouter.UseVisualStyleBackColor = true;
+            this.btnAjouter.Click += new System.EventHandler(this.btnAjouter_Click);
             // 
             // btnValider
             // 
@@ -298,6 +311,7 @@
             this.btnValider.TabIndex = 19;
             this.btnValider.Text = "VALIDER";
             this.btnValider.UseVisualStyleBackColor = false;
+            this.btnValider.Click += new System.EventHandler(this.btnValider_Click);
             // 
             // grpDetailVisite
             // 
@@ -322,18 +336,6 @@
             this.lblMedicamentsOffert.TabIndex = 21;
             this.lblMedicamentsOffert.Text = "Medicaments offerts :";
             // 
-            // bdgSourceMedicament
-            // 
-            this.bdgSourceMedicament.DataSource = typeof(GsbRapports.medicament);
-            // 
-            // bdgSourceMedecin
-            // 
-            this.bdgSourceMedecin.DataSource = typeof(GsbRapports.medecin);
-            // 
-            // bdgSourceVisiteur
-            // 
-            this.bdgSourceVisiteur.DataSource = typeof(GsbRapports.visiteur);
-            // 
             // frmAjoutRapports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -354,16 +356,16 @@
             this.Name = "frmAjoutRapports";
             this.Text = "Ajouter Rapport";
             this.Load += new System.EventHandler(this.frmAjoutRapports_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceVisiteur)).EndInit();
             this.grpVisiteur.ResumeLayout(false);
             this.grpVisiteur.PerformLayout();
             this.grpMedecin.ResumeLayout(false);
             this.grpMedecin.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceMedecin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceMedicament)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.QuantiteMedicament)).EndInit();
             this.grpDetailVisite.ResumeLayout(false);
             this.grpDetailVisite.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceMedicament)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceMedecin)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceVisiteur)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

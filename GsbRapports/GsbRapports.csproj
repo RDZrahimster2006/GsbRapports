@@ -57,6 +57,22 @@
     <Compile Include="frmAjoutRapports.Designer.cs">
       <DependentUpon>frmAjoutRapports.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmModifier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmModifier.Designer.cs">
+      <DependentUpon>frmModifier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gsbrapports2026DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>gsbrapports2026DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="gsbrapports2026DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>gsbrapports2026DataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +114,9 @@
     <EmbeddedResource Include="frmAjoutRapports.resx">
       <DependentUpon>frmAjoutRapports.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmModifier.resx">
+      <DependentUpon>frmModifier.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
@@ -110,8 +129,33 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="gsbrapports2026DataSet.xsc">
+      <DependentUpon>gsbrapports2026DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="gsbrapports2026DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>gsbrapports2026DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="gsbrapports2026DataSet.xss">
+      <DependentUpon>gsbrapports2026DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="gsbrapports2026DataSet1.xsc">
+      <DependentUpon>gsbrapports2026DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="gsbrapports2026DataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>gsbrapports2026DataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="gsbrapports2026DataSet1.xss">
+      <DependentUpon>gsbrapports2026DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\DataSources\famille.datasource" />
     <None Include="Properties\DataSources\medecin.datasource" />
     <None Include="Properties\DataSources\medicament.datasource" />
+    <None Include="Properties\DataSources\offrir.datasource" />
+    <None Include="Properties\DataSources\rapport.datasource" />
     <None Include="Properties\DataSources\visiteur.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

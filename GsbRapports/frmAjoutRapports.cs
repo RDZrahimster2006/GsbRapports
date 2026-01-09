@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Core.Objects.DataClasses;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -116,6 +117,42 @@ namespace GsbRapports
 
             cmbAdresseMedecin.Text = adresseMedecin;
         }
-    
+
+        private void btnAjouter_Click(object sender, EventArgs e)
+        {
+            lstMedicament.Items.Add(cmbNomMedicament.Text);
+            lstMedicament.SelectedIndex = lstMedicament.Items.Count - 1;
+            lstMedicament.Items.Add(QuantiteMedicament.Value.ToString());   
+
+
+        }
+
+        private void btnValider_Click(object sender, EventArgs e)
+        {
+            rapport visiteRapport = new rapport();
+            string nomVisiteur = cmbNomVisiteur.Text;
+            string prenomVisiteur = cmbPrenomVisiteur.Text;
+            var visiteur = mesDonneesEF.visiteurs
+                .FirstOrDefault(v => v.nom == nomVisiteur && v.prenom == prenomVisiteur);
+            if (visiteur != null)
+            {
+                visiteRapport.idVisiteur = visiteur.id;
+            }
+            string nomMedecin = cmbNomMedecin.Text;
+            string prenomMedecin = cmbPrenomMedecin.Text;
+            var medecin = mesDonneesEF.medecins
+                .FirstOrDefault(m => m.nom == nomMedecin && m.prenom == prenomMedecin);
+            if (medecin != null)
+            {
+                visiteRapport.idMedecin = medecin.id;
+            }
+            visiteRapport.id = (mesDonneesEF.rapports.Max(r => r.id)+1);
+            visiteRapport.date = dateVisite.Value;
+            visiteRapport.bilan = txtBilan.Text;
+            visiteRapport.motif = txtMotif.Text;
+            mesDonneesEF.rapports.Add(visiteRapport);
+            mesDonneesEF.SaveChanges();
+            MessageBox.Show("Rapport ajouté avec succès !");
+        }
     }
 }
