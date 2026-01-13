@@ -12,14 +12,76 @@ namespace GsbRapports
 {
     public partial class frmModifier : Form
     {
-        public frmModifier()
+        private gsbrapports2026Entities mesDonneesEF;
+
+        public frmModifier(gsbrapports2026Entities mesDonneeEF)
         {
             InitializeComponent();
+            this.mesDonneesEF = mesDonneeEF;
+            bdgSourceModifier = new BindingSource();
+
+            var listeVisiteurs = (from v in mesDonneesEF.visiteurs
+                                  orderby v.nom
+                                  select v.nom)
+                     .Distinct()
+                     .Select(n => new
+                     {
+                         NomComplet = n
+                     })
+                     .ToList();
+
+            this.bdgSourceModifier.DataSource = listeVisiteurs;
+            cmbNom.DisplayMember = "NomComplet";
+            cmbNom.ValueMember = "Id";
+            cmbNom.DataSource = bdgSourceModifier;
         }
+
+       
 
         private void bindingSource1_CurrentChanged(object sender, EventArgs e)
         {
 
         }
+
+        private void frmModifier_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbNom_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string nomSelectionne = cmbNom.Text;
+            var listePrenoms = (from v in mesDonneesEF.visiteurs
+                                where v.nom == nomSelectionne
+                                select new
+                                {
+                                    Prenom = v.prenom
+                                }).ToList();
+            cmbPrenom.DisplayMember = "Prenom";
+            cmbPrenom.ValueMember = "Prenom";
+            cmbPrenom.DataSource = listePrenoms;
+        }
+
+        private void vldValider_Click(object sender, EventArgs e)
+        {
+            string nomVisiteur = cmbNom.Text;
+            string prenomVisiteur = cmbPrenom.Text;
+
+            var visiteur = mesDonneesEF.visiteurs
+                .FirstOrDefault(v => v.nom == nomVisiteur && v.prenom == prenomVisiteur);
+
+            if (visiteur == null)
+            {
+                MessageBox.Show("Visiteur introuvable.");
+                return;
+            }
+
+            string idVisiteur = visiteur.id;
+
+            
+            frmModifier2 frmModifier2 = new frmModifier2(mesDonneesEF, idVisiteur);
+            frmModifier2.Show();
+
     }
+}
 }

@@ -12,11 +12,13 @@ namespace GsbRapports
 { 
     public partial class Menu : Form
     {
-        private gsbrapports2026Entities mesDonneesEF { get; set; }
+       
+        private gsbrapports2026Entities mesDonneesEF= new gsbrapports2026Entities();
+        
         public Menu()
         {
             InitializeComponent();
-            this.mesDonneesEF = new gsbrapports2026Entities();
+           // this.mesDonneesEF = new gsbrapports2026Entities();
         }
 
 
@@ -35,7 +37,9 @@ namespace GsbRapports
 
         private void modificationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            frmModifier modif = new frmModifier(mesDonneesEF);
+            modif.MdiParent = this;
+            modif.Show();
         }
     }
 }
