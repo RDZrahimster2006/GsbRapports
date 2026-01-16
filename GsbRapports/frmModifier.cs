@@ -13,12 +13,14 @@ namespace GsbRapports
     public partial class frmModifier : Form
     {
         private gsbrapports2026Entities mesDonneesEF;
+        private string idVisiteur;
 
-        public frmModifier(gsbrapports2026Entities mesDonneeEF)
+        public frmModifier(gsbrapports2026Entities mesDonneeEF, string idVisiteur)
         {
             InitializeComponent();
             this.mesDonneesEF = mesDonneeEF;
             bdgSourceModifier = new BindingSource();
+            this.idVisiteur = idVisiteur;
 
             var listeVisiteurs = (from v in mesDonneesEF.visiteurs
                                   orderby v.nom
@@ -29,11 +31,27 @@ namespace GsbRapports
                          NomComplet = n
                      })
                      .ToList();
+            var rapports = mesDonneesEF.rapports
+            .Where(r => r.idVisiteur == idVisiteur)
+            .ToList();
 
             this.bdgSourceModifier.DataSource = listeVisiteurs;
             cmbNom.DisplayMember = "NomComplet";
             cmbNom.ValueMember = "Id";
             cmbNom.DataSource = bdgSourceModifier;
+           
+            dataGridView1.DataSource = mesDonneesEF.rapports
+                .Where(r => r.idVisiteur == idVisiteur)
+                .ToList(); 
+
+            dataGridView1.ReadOnly = false;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+
+
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
        
@@ -79,9 +97,27 @@ namespace GsbRapports
             string idVisiteur = visiteur.id;
 
             
-            frmModifier2 frmModifier2 = new frmModifier2(mesDonneesEF, idVisiteur);
-            frmModifier2.Show();
+            frmModifier frmModifierNew = new frmModifier(mesDonneesEF, idVisiteur);
+            
+           this.Close();
+           frmModifierNew.Show();
+
 
     }
-}
+      
+
+        private void btnRapports_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                mesDonneesEF.SaveChanges();
+                MessageBox.Show("Toutes les modifications ont été enregistrées dans la base !");
+                dataGridView1.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erreur lors de l'enregistrement : " + ex.Message);
+            }
+        }
+    }
 }

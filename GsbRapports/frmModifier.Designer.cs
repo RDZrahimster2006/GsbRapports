@@ -38,13 +38,13 @@
             this.cmbNom = new System.Windows.Forms.ComboBox();
             this.vldValider = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.bdgSourceGrid = new System.Windows.Forms.BindingSource(this.components);
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.motifDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bilanDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idVisiteurDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idMedecinDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bdgSourceGrid = new System.Windows.Forms.BindingSource(this.components);
             this.btnRapports = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bdgSourceModifier)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -134,12 +134,8 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
             this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(962, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(962, 239);
             this.dataGridView1.TabIndex = 9;
-            // 
-            // bdgSourceGrid
-            // 
-            this.bdgSourceGrid.DataSource = typeof(GsbRapports.rapport);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -193,15 +189,20 @@
             this.idMedecinDataGridViewTextBoxColumn.ReadOnly = true;
             this.idMedecinDataGridViewTextBoxColumn.Width = 150;
             // 
+            // bdgSourceGrid
+            // 
+            this.bdgSourceGrid.DataSource = typeof(GsbRapports.rapport);
+            // 
             // btnRapports
             // 
             this.btnRapports.BackColor = System.Drawing.Color.Lime;
-            this.btnRapports.Location = new System.Drawing.Point(560, 218);
+            this.btnRapports.Location = new System.Drawing.Point(560, 307);
             this.btnRapports.Name = "btnRapports";
             this.btnRapports.Size = new System.Drawing.Size(962, 79);
             this.btnRapports.TabIndex = 10;
             this.btnRapports.Text = "Valider Selection";
             this.btnRapports.UseVisualStyleBackColor = false;
+            this.btnRapports.Click += new System.EventHandler(this.btnRapports_Click);
             // 
             // frmModifier
             // 

@@ -14,11 +14,12 @@ namespace GsbRapports
     {
        
         private gsbrapports2026Entities mesDonneesEF= new gsbrapports2026Entities();
-        
+        private string idVisiteur;
+
         public Menu()
         {
             InitializeComponent();
-           // this.mesDonneesEF = new gsbrapports2026Entities();
+           
         }
 
 
@@ -37,7 +38,7 @@ namespace GsbRapports
 
         private void modificationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmModifier modif = new frmModifier(mesDonneesEF);
+            frmModifier modif = new frmModifier(mesDonneesEF, idVisiteur);
             modif.MdiParent = this;
             modif.Show();
         }
