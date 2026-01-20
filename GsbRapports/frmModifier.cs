@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GsbRapports
@@ -18,73 +12,45 @@ namespace GsbRapports
         public frmModifier(gsbrapports2026Entities mesDonneeEF, string idVisiteur)
         {
             InitializeComponent();
+
             this.mesDonneesEF = mesDonneeEF;
-            bdgSourceModifier = new BindingSource();
             this.idVisiteur = idVisiteur;
 
-            var listeVisiteurs = (from v in mesDonneesEF.visiteurs
-                                  orderby v.nom
-                                  select v.nom)
-                     .Distinct()
-                     .Select(n => new
-                     {
-                         NomComplet = n
-                     })
-                     .ToList();
-            var rapports = mesDonneesEF.rapports
-            .Where(r => r.idVisiteur == idVisiteur)
-            .ToList();
+            // Charger les noms dans cmbNom
+            var listeNoms = mesDonneesEF.visiteurs
+                .OrderBy(v => v.nom)
+                .Select(v => v.nom)
+                .Distinct()
+                .ToList();
 
-            this.bdgSourceModifier.DataSource = listeVisiteurs;
-            cmbNom.DisplayMember = "NomComplet";
-            cmbNom.ValueMember = "Id";
-            cmbNom.DataSource = bdgSourceModifier;
-           
-            dataGridView1.DataSource = mesDonneesEF.rapports
-                .Where(r => r.idVisiteur == idVisiteur)
-                .ToList(); 
+            cmbNom.DataSource = listeNoms;
 
-            dataGridView1.ReadOnly = false;
+            // Quand on change le nom, remplir le ComboBox prénom
+            cmbNom.SelectedIndexChanged += (s, e) =>
+            {
+                string nomSelectionne = cmbNom.Text;
+                var listePrenoms = mesDonneesEF.visiteurs
+                    .Where(v => v.nom == nomSelectionne)
+                    .Select(v => v.prenom)
+                    .ToList();
+
+                cmbPrenom.DataSource = listePrenoms;
+            };
+
+            // Configurer DataGridView
+            dataGridView1.ReadOnly = false; // modifiable
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-
-
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
-       
-
-        private void bindingSource1_CurrentChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void frmModifier_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cmbNom_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string nomSelectionne = cmbNom.Text;
-            var listePrenoms = (from v in mesDonneesEF.visiteurs
-                                where v.nom == nomSelectionne
-                                select new
-                                {
-                                    Prenom = v.prenom
-                                }).ToList();
-            cmbPrenom.DisplayMember = "Prenom";
-            cmbPrenom.ValueMember = "Prenom";
-            cmbPrenom.DataSource = listePrenoms;
-        }
-
+        // Bouton pour filtrer les rapports par nom, prénom et date
         private void vldValider_Click(object sender, EventArgs e)
         {
             string nomVisiteur = cmbNom.Text;
             string prenomVisiteur = cmbPrenom.Text;
+            DateTime dateChoisie = dtDate.Value.Date;
 
+            // Récupérer le visiteur correspondant
             var visiteur = mesDonneesEF.visiteurs
                 .FirstOrDefault(v => v.nom == nomVisiteur && v.prenom == prenomVisiteur);
 
@@ -94,18 +60,17 @@ namespace GsbRapports
                 return;
             }
 
-            string idVisiteur = visiteur.id;
+            idVisiteur = visiteur.id;
 
-            
-            frmModifier frmModifierNew = new frmModifier(mesDonneesEF, idVisiteur);
-            
-           this.Close();
-           frmModifierNew.Show();
+            // Filtrer les rapports du visiteur pour la date sélectionnée
+            var listeRapports = mesDonneesEF.rapports
+                .Where(r => r.idVisiteur == idVisiteur && r.date == dateChoisie)
+                .ToList();
 
+            dataGridView1.DataSource = listeRapports;
+        }
 
-    }
-      
-
+        // Bouton pour enregistrer les modifications
         private void btnRapports_Click(object sender, EventArgs e)
         {
             try

@@ -68,6 +68,7 @@
             this.visualisationToolStripMenuItem.Name = "visualisationToolStripMenuItem";
             this.visualisationToolStripMenuItem.Size = new System.Drawing.Size(126, 29);
             this.visualisationToolStripMenuItem.Text = "Visualisation";
+            this.visualisationToolStripMenuItem.Click += new System.EventHandler(this.visualisationToolStripMenuItem_Click);
             // 
             // Menu
             // 

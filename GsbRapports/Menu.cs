@@ -42,5 +42,12 @@ namespace GsbRapports
             modif.MdiParent = this;
             modif.Show();
         }
+
+        private void visualisationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmVisualiser modif = new frmVisualiser();
+            modif.MdiParent = this;
+            modif.Show();
+        }
     }
 }

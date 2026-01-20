@@ -63,6 +63,12 @@
     <Compile Include="frmModifier.Designer.cs">
       <DependentUpon>frmModifier.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmVisualiser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmVisualiser.Designer.cs">
+      <DependentUpon>frmVisualiser.cs</DependentUpon>
+    </Compile>
     <Compile Include="gsbrapports2026DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -116,6 +122,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmModifier.resx">
       <DependentUpon>frmModifier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmVisualiser.resx">
+      <DependentUpon>frmVisualiser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>

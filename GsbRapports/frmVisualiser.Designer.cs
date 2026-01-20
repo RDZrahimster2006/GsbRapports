@@ -1,6 +1,6 @@
 ﻿namespace GsbRapports
 {
-    partial class frmModifier
+    partial class frmVisualiser
     {
         /// <summary>
         /// Required designer variable.
@@ -29,94 +29,103 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.lbldate = new System.Windows.Forms.Label();
-            this.lblNom = new System.Windows.Forms.Label();
-            this.dtDate = new System.Windows.Forms.DateTimePicker();
-            this.lblPrenom = new System.Windows.Forms.Label();
-            this.cmbPrenom = new System.Windows.Forms.ComboBox();
-            this.bdgSourceModifier = new System.Windows.Forms.BindingSource(this.components);
             this.cmbNom = new System.Windows.Forms.ComboBox();
-            this.vldValider = new System.Windows.Forms.Button();
+            this.bdgSourceVisiteur = new System.Windows.Forms.BindingSource(this.components);
+            this.cmbPrenom = new System.Windows.Forms.ComboBox();
+            this.dtDate = new System.Windows.Forms.DateTimePicker();
+            this.lblDate = new System.Windows.Forms.Label();
+            this.lblNom = new System.Windows.Forms.Label();
+            this.lblPrenom = new System.Windows.Forms.Label();
+            this.btnValider = new System.Windows.Forms.Button();
+            this.btnEnregistrer = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.bdgSourceRapport = new System.Windows.Forms.BindingSource(this.components);
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.motifDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bilanDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idVisiteurDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idMedecinDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bdgSourceGrid = new System.Windows.Forms.BindingSource(this.components);
-            this.btnRapports = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceModifier)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceVisiteur)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceRapport)).BeginInit();
             this.SuspendLayout();
             // 
-            // lbldate
+            // cmbNom
             // 
-            this.lbldate.AutoSize = true;
-            this.lbldate.Location = new System.Drawing.Point(102, 59);
-            this.lbldate.Name = "lbldate";
-            this.lbldate.Size = new System.Drawing.Size(52, 20);
-            this.lbldate.TabIndex = 0;
-            this.lbldate.Text = "Date :";
+            this.cmbNom.FormattingEnabled = true;
+            this.cmbNom.Location = new System.Drawing.Point(116, 201);
+            this.cmbNom.Name = "cmbNom";
+            this.cmbNom.Size = new System.Drawing.Size(121, 28);
+            this.cmbNom.TabIndex = 0;
+            // 
+            // bdgSourceVisiteur
+            // 
+            this.bdgSourceVisiteur.DataSource = typeof(GsbRapports.visiteur);
+            // 
+            // cmbPrenom
+            // 
+            this.cmbPrenom.DataSource = this.bdgSourceVisiteur;
+            this.cmbPrenom.FormattingEnabled = true;
+            this.cmbPrenom.Location = new System.Drawing.Point(116, 289);
+            this.cmbPrenom.Name = "cmbPrenom";
+            this.cmbPrenom.Size = new System.Drawing.Size(121, 28);
+            this.cmbPrenom.TabIndex = 1;
+            // 
+            // dtDate
+            // 
+            this.dtDate.Location = new System.Drawing.Point(116, 104);
+            this.dtDate.Name = "dtDate";
+            this.dtDate.Size = new System.Drawing.Size(247, 26);
+            this.dtDate.TabIndex = 2;
+            // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.Location = new System.Drawing.Point(12, 104);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(52, 20);
+            this.lblDate.TabIndex = 3;
+            this.lblDate.Text = "Date :";
             // 
             // lblNom
             // 
             this.lblNom.AutoSize = true;
-            this.lblNom.Location = new System.Drawing.Point(102, 137);
+            this.lblNom.Location = new System.Drawing.Point(12, 204);
             this.lblNom.Name = "lblNom";
             this.lblNom.Size = new System.Drawing.Size(50, 20);
-            this.lblNom.TabIndex = 1;
+            this.lblNom.TabIndex = 4;
             this.lblNom.Text = "Nom :";
-            // 
-            // dtDate
-            // 
-            this.dtDate.Location = new System.Drawing.Point(219, 59);
-            this.dtDate.Name = "dtDate";
-            this.dtDate.Size = new System.Drawing.Size(262, 26);
-            this.dtDate.TabIndex = 2;
             // 
             // lblPrenom
             // 
             this.lblPrenom.AutoSize = true;
-            this.lblPrenom.Location = new System.Drawing.Point(102, 218);
+            this.lblPrenom.Location = new System.Drawing.Point(12, 301);
             this.lblPrenom.Name = "lblPrenom";
             this.lblPrenom.Size = new System.Drawing.Size(72, 20);
             this.lblPrenom.TabIndex = 5;
             this.lblPrenom.Text = "Prenom :";
             // 
-            // cmbPrenom
+            // btnValider
             // 
-            this.cmbPrenom.DataSource = this.bdgSourceModifier;
-            this.cmbPrenom.FormattingEnabled = true;
-            this.cmbPrenom.Location = new System.Drawing.Point(219, 215);
-            this.cmbPrenom.Name = "cmbPrenom";
-            this.cmbPrenom.Size = new System.Drawing.Size(121, 28);
-            this.cmbPrenom.TabIndex = 6;
+            this.btnValider.BackColor = System.Drawing.Color.Lime;
+            this.btnValider.Location = new System.Drawing.Point(16, 371);
+            this.btnValider.Name = "btnValider";
+            this.btnValider.Size = new System.Drawing.Size(274, 77);
+            this.btnValider.TabIndex = 6;
+            this.btnValider.Text = "Valider";
+            this.btnValider.UseVisualStyleBackColor = false;
+            this.btnValider.Click += new System.EventHandler(this.btnValider_Click);
             // 
-            // bdgSourceModifier
+            // btnEnregistrer
             // 
-            this.bdgSourceModifier.DataSource = typeof(GsbRapports.visiteur);
-            // 
-            // cmbNom
-            // 
-            this.cmbNom.FormattingEnabled = true;
-            this.cmbNom.Location = new System.Drawing.Point(219, 134);
-            this.cmbNom.Name = "cmbNom";
-            this.cmbNom.Size = new System.Drawing.Size(121, 28);
-            this.cmbNom.TabIndex = 7;
-            
-            // 
-            // vldValider
-            // 
-            this.vldValider.BackColor = System.Drawing.Color.Lime;
-            this.vldValider.Location = new System.Drawing.Point(68, 305);
-            this.vldValider.Name = "vldValider";
-            this.vldValider.Size = new System.Drawing.Size(413, 81);
-            this.vldValider.TabIndex = 8;
-            this.vldValider.Text = "Valider";
-            this.vldValider.UseVisualStyleBackColor = false;
-            this.vldValider.Click += new System.EventHandler(this.vldValider_Click);
+            this.btnEnregistrer.BackColor = System.Drawing.Color.Lime;
+            this.btnEnregistrer.Location = new System.Drawing.Point(456, 371);
+            this.btnEnregistrer.Name = "btnEnregistrer";
+            this.btnEnregistrer.Size = new System.Drawing.Size(962, 77);
+            this.btnEnregistrer.TabIndex = 7;
+            this.btnEnregistrer.Text = "Telecharger XML";
+            this.btnEnregistrer.UseVisualStyleBackColor = false;
             // 
             // dataGridView1
             // 
@@ -129,13 +138,18 @@
             this.bilanDataGridViewTextBoxColumn,
             this.idVisiteurDataGridViewTextBoxColumn,
             this.idMedecinDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.bdgSourceGrid;
-            this.dataGridView1.Location = new System.Drawing.Point(560, 46);
+            this.dataGridView1.DataSource = this.bdgSourceRapport;
+            this.dataGridView1.Location = new System.Drawing.Point(456, 27);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
             this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(962, 239);
-            this.dataGridView1.TabIndex = 9;
+            this.dataGridView1.Size = new System.Drawing.Size(962, 305);
+            this.dataGridView1.TabIndex = 8;
+            this.dataGridView1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
+            // 
+            // bdgSourceRapport
+            // 
+            this.bdgSourceRapport.DataSource = typeof(GsbRapports.rapport);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -161,6 +175,7 @@
             this.motifDataGridViewTextBoxColumn.HeaderText = "motif";
             this.motifDataGridViewTextBoxColumn.MinimumWidth = 8;
             this.motifDataGridViewTextBoxColumn.Name = "motifDataGridViewTextBoxColumn";
+            this.motifDataGridViewTextBoxColumn.ReadOnly = true;
             this.motifDataGridViewTextBoxColumn.Width = 150;
             // 
             // bilanDataGridViewTextBoxColumn
@@ -169,6 +184,7 @@
             this.bilanDataGridViewTextBoxColumn.HeaderText = "bilan";
             this.bilanDataGridViewTextBoxColumn.MinimumWidth = 8;
             this.bilanDataGridViewTextBoxColumn.Name = "bilanDataGridViewTextBoxColumn";
+            this.bilanDataGridViewTextBoxColumn.ReadOnly = true;
             this.bilanDataGridViewTextBoxColumn.Width = 150;
             // 
             // idVisiteurDataGridViewTextBoxColumn
@@ -189,41 +205,25 @@
             this.idMedecinDataGridViewTextBoxColumn.ReadOnly = true;
             this.idMedecinDataGridViewTextBoxColumn.Width = 150;
             // 
-            // bdgSourceGrid
-            // 
-            this.bdgSourceGrid.DataSource = typeof(GsbRapports.rapport);
-            // 
-            // btnRapports
-            // 
-            this.btnRapports.BackColor = System.Drawing.Color.Lime;
-            this.btnRapports.Location = new System.Drawing.Point(560, 307);
-            this.btnRapports.Name = "btnRapports";
-            this.btnRapports.Size = new System.Drawing.Size(962, 79);
-            this.btnRapports.TabIndex = 10;
-            this.btnRapports.Text = "Valider Selection";
-            this.btnRapports.UseVisualStyleBackColor = false;
-            this.btnRapports.Click += new System.EventHandler(this.btnRapports_Click);
-            // 
-            // frmModifier
+            // frmVisualiser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1578, 556);
-            this.Controls.Add(this.btnRapports);
+            this.ClientSize = new System.Drawing.Size(1564, 575);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.vldValider);
-            this.Controls.Add(this.cmbNom);
-            this.Controls.Add(this.cmbPrenom);
+            this.Controls.Add(this.btnEnregistrer);
+            this.Controls.Add(this.btnValider);
             this.Controls.Add(this.lblPrenom);
-            this.Controls.Add(this.dtDate);
             this.Controls.Add(this.lblNom);
-            this.Controls.Add(this.lbldate);
-            this.Name = "frmModifier";
-            this.Text = "frmModifier";
-            
-            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceModifier)).EndInit();
+            this.Controls.Add(this.lblDate);
+            this.Controls.Add(this.dtDate);
+            this.Controls.Add(this.cmbPrenom);
+            this.Controls.Add(this.cmbNom);
+            this.Name = "frmVisualiser";
+            this.Text = "frmVisualiser";
+            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceVisiteur)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bdgSourceRapport)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -231,22 +231,22 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lbldate;
-        private System.Windows.Forms.Label lblNom;
-        private System.Windows.Forms.DateTimePicker dtDate;
-        private System.Windows.Forms.Label lblPrenom;
-        private System.Windows.Forms.ComboBox cmbPrenom;
         private System.Windows.Forms.ComboBox cmbNom;
-        private System.Windows.Forms.Button vldValider;
-        private System.Windows.Forms.BindingSource bdgSourceModifier;
+        private System.Windows.Forms.ComboBox cmbPrenom;
+        private System.Windows.Forms.DateTimePicker dtDate;
+        private System.Windows.Forms.Label lblDate;
+        private System.Windows.Forms.Label lblNom;
+        private System.Windows.Forms.Label lblPrenom;
+        private System.Windows.Forms.Button btnValider;
+        private System.Windows.Forms.Button btnEnregistrer;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.BindingSource bdgSourceGrid;
+        private System.Windows.Forms.BindingSource bdgSourceVisiteur;
+        private System.Windows.Forms.BindingSource bdgSourceRapport;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn motifDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn bilanDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idVisiteurDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idMedecinDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Button btnRapports;
     }
 }
