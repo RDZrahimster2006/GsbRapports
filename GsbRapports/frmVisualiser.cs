@@ -1,20 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Data.Entity.Infrastructure.Design.Executor;
 
 namespace GsbRapports
 {
     public partial class frmVisualiser : Form
     {
         private gsbrapports2026Entities mesDonneesEF = new gsbrapports2026Entities();
-        private string idVisiteur;
+
         public frmVisualiser()
         {
             InitializeComponent();
@@ -28,7 +21,7 @@ namespace GsbRapports
 
             cmbNom.DataSource = listeNoms;
 
-            // Quand on change de nom, charger les prénoms correspondants
+            // Charger les prénoms quand le nom change
             cmbNom.SelectedIndexChanged += (s, e) =>
             {
                 string nomSelectionne = cmbNom.Text;
@@ -41,13 +34,14 @@ namespace GsbRapports
                 cmbPrenom.DataSource = listePrenoms;
             };
 
-            // DataGridView en lecture seule
+            // Configuration du DataGridView
             dataGridView1.ReadOnly = true;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.MultiSelect = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
-
+        // Bouton VALIDER (filtrage)
         private void btnValider_Click(object sender, EventArgs e)
         {
             string nom = cmbNom.Text;
@@ -63,34 +57,46 @@ namespace GsbRapports
                 return;
             }
 
-            var rapports = mesDonneesEF.rapports
+            var listeRapports = mesDonneesEF.rapports
                 .Where(r => r.idVisiteur == visiteur.id
-                         && r.date == dateChoisie);
+                         && r.date == dateChoisie)
+                .ToList();
 
-            dataGridView1.DataSource = rapports.ToList();
-            dataGridView1.ReadOnly = true;
-            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.DataSource = listeRapports;
 
             MessageBox.Show("Rapports affichés !");
         }
 
-        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        // Bouton TELECHARGER XML
+        private void btnTelechargerXml_Click(object sender, EventArgs e)
         {
-            if (e.RowIndex < 0) return;
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Veuillez sélectionner un rapport.");
+                return;
+            }
 
-            var rapport = (rapport)dataGridView1.Rows[e.RowIndex].DataBoundItem;
+            rapport rapportSelectionne =
+                dataGridView1.SelectedRows[0].DataBoundItem as rapport;
+
+            if (rapportSelectionne == null)
+            {
+                MessageBox.Show("Erreur lors de la récupération du rapport.");
+                return;
+            }
 
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Filter = "Fichier XML (*.xml)|*.xml";
-            sfd.FileName = "rapport_" + rapport.id + ".xml";
+            sfd.FileName = "rapport_" + rapportSelectionne.id + ".xml";
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                ExportRapportEnXml(rapport, sfd.FileName);
+                ExportRapportEnXml(rapportSelectionne, sfd.FileName);
                 MessageBox.Show("Rapport téléchargé en XML !");
             }
         }
+
+        // Export XML
         private void ExportRapportEnXml(rapport r, string chemin)
         {
             var doc = new System.Xml.Linq.XDocument(

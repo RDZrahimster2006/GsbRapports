@@ -39,13 +39,13 @@
             this.btnValider = new System.Windows.Forms.Button();
             this.btnEnregistrer = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.bdgSourceRapport = new System.Windows.Forms.BindingSource(this.components);
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.motifDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bilanDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idVisiteurDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idMedecinDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bdgSourceRapport = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bdgSourceVisiteur)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdgSourceRapport)).BeginInit();
@@ -126,6 +126,7 @@
             this.btnEnregistrer.TabIndex = 7;
             this.btnEnregistrer.Text = "Telecharger XML";
             this.btnEnregistrer.UseVisualStyleBackColor = false;
+            this.btnEnregistrer.Click += new System.EventHandler(this.btnTelechargerXml_Click);
             // 
             // dataGridView1
             // 
@@ -145,11 +146,6 @@
             this.dataGridView1.RowTemplate.Height = 28;
             this.dataGridView1.Size = new System.Drawing.Size(962, 305);
             this.dataGridView1.TabIndex = 8;
-            this.dataGridView1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
-            // 
-            // bdgSourceRapport
-            // 
-            this.bdgSourceRapport.DataSource = typeof(GsbRapports.rapport);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -204,6 +200,10 @@
             this.idMedecinDataGridViewTextBoxColumn.Name = "idMedecinDataGridViewTextBoxColumn";
             this.idMedecinDataGridViewTextBoxColumn.ReadOnly = true;
             this.idMedecinDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // bdgSourceRapport
+            // 
+            this.bdgSourceRapport.DataSource = typeof(GsbRapports.rapport);
             // 
             // frmVisualiser
             // 
